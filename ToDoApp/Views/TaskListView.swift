@@ -15,6 +15,25 @@ struct TaskListView: View {
     var body: some View {
         NavigationStack {
             VStack {
+                TextField("Search tasks...", text: $viewModel.searchQuery)
+                    .textFieldStyle(.roundedBorder)
+                    .padding([.horizontal, .top])
+                    .overlay(
+                        HStack {
+                            Spacer()
+                            if !viewModel.searchQuery.isEmpty {
+                                Button(action: {
+                                    viewModel.searchQuery = ""
+                                }) {
+                                    Image(systemName: "xmark.circle.fill")
+                                        .imageScale(.small)
+                                        .foregroundColor(.gray)
+                                }
+                                .padding(.trailing, 24)
+                                .padding(.top, 16)
+                            }
+                        }
+                    ) // Overlay fir clear button
                 List {
                     ForEach(viewModel.tasks, id: \.objectID) { task in
                         TaskRowView(task: task, viewModel: viewModel)
@@ -25,6 +44,7 @@ struct TaskListView: View {
                             viewModel.deleteTask(task)
                         }
                     }
+                    .animation(.default, value: viewModel.tasks)
                     HStack(alignment: .top) {
                         VStack {
                             TextField("New Task", text: $newTaskTitle)
@@ -42,7 +62,7 @@ struct TaskListView: View {
                                 .foregroundColor(.blue)
                         }
                     }
-
+                    
                 }
                 .contentMargins(.top, 16)
             }

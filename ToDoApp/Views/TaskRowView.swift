@@ -17,6 +17,8 @@ struct TaskRowView: View {
             }) {
                 Image(systemName: task.isComplete ? "checkmark.circle.fill" : "circle")
                     .foregroundColor(task.isComplete ? .green : .gray)
+                    .scaleEffect(task.isComplete ? 1.2 : 1.0)
+                    .animation(.spring(), value: task.isComplete)
             }
             .padding(.trailing, 8)
             VStack(alignment: .leading) {
