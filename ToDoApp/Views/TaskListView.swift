@@ -11,12 +11,15 @@ struct TaskListView: View {
     @StateObject private var viewModel = TaskViewModel()
     @State private var newTaskTitle = ""
     @State private var newTaskNote = ""
-    
+    @State var selectedPriority: TaskPriority? = .low
+    @FocusState private var isTextFieldFocused: Bool
+
     var body: some View {
         NavigationStack {
             VStack {
                 TextField("Search tasks...", text: $viewModel.searchQuery)
                     .textFieldStyle(.roundedBorder)
+                    .focused($isTextFieldFocused)
                     .padding([.horizontal, .top])
                     .overlay(
                         HStack {
@@ -28,12 +31,12 @@ struct TaskListView: View {
                                     Image(systemName: "xmark.circle.fill")
                                         .imageScale(.small)
                                         .foregroundColor(.gray)
-                                }
+                                } // Button - Clear
                                 .padding(.trailing, 24)
                                 .padding(.top, 16)
                             }
-                        }
-                    ) // Overlay fir clear button
+                        } // HStack
+                    ) // Overlay - Clear button
                 List {
                     ForEach(viewModel.tasks, id: \.objectID) { task in
                         TaskRowView(task: task, viewModel: viewModel)
@@ -43,31 +46,43 @@ struct TaskListView: View {
                             let task = viewModel.tasks[index]
                             viewModel.deleteTask(task)
                         }
-                    }
-                    .animation(.default, value: viewModel.tasks)
+                    } // onDelete task event
                     HStack(alignment: .top) {
-                        VStack {
+                        VStack(alignment: .leading) {
                             TextField("New Task", text: $newTaskTitle)
+                                .focused($isTextFieldFocused)
                             TextField("Note", text: $newTaskNote)
+                                .focused($isTextFieldFocused)
                                 .font(.footnote)
-                        }
+                                .padding(.top, 4)
+                            Picker("Priority", selection: $selectedPriority) {
+                                ForEach(TaskPriority.allCases, id: \.self) { priority in
+                                    Text(priority.rawValue).tag(priority)
+                                }
+                            }
+                            .pickerStyle(SegmentedPickerStyle())
+                            .padding(.top, 4)
+                        } // VStack - New task
+                        .padding(.vertical, 8)
                         Button(action: {
                             guard !newTaskTitle.isEmpty else { return }
-                            viewModel.addTask(title: newTaskTitle, note: newTaskNote)
+                            viewModel.addTask(title: newTaskTitle, note: newTaskNote, priority: selectedPriority)
                             newTaskTitle = ""
                             newTaskNote = ""
+                            selectedPriority = .low
+                            isTextFieldFocused = false
                         }) {
                             Image(systemName: "plus.circle.fill")
                                 .font(.title)
                                 .foregroundColor(.blue)
-                        }
-                    }
+                        } // Button - Add task
+                    } // HStack - New task
                     
-                }
+                } // List
                 .contentMargins(.top, 16)
-            }
+            } // VStack
             .navigationTitle("To-Do List")
-        }
+        } // NavigationStack
     }
 }
 

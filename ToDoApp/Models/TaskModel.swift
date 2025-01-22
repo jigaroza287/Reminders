@@ -16,3 +16,20 @@ extension Task {
         return task
     }
 }
+
+enum TaskPriority: String, CaseIterable {
+    case low = "low"
+    case medium = "medium"
+    case high = "high"
+    
+    func displayText() -> String {
+        switch self {
+        case .high:
+            return "!!! "
+        case .medium:
+            return "!! "
+        case .low:
+            return "! "
+        }
+    }
+}

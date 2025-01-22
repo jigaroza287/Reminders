@@ -18,11 +18,14 @@ struct TaskRowView: View {
                 Image(systemName: task.isComplete ? "checkmark.circle.fill" : "circle")
                     .foregroundColor(task.isComplete ? .green : .gray)
                     .scaleEffect(task.isComplete ? 1.2 : 1.0)
-                    .animation(.spring(), value: task.isComplete)
             }
+            .buttonStyle(PlainButtonStyle())
             .padding(.trailing, 8)
             VStack(alignment: .leading) {
-                Text(task.title ?? "")
+                Text(TaskPriority(rawValue: task.priority ?? "")?.displayText() ?? "")
+                    .font(.subheadline)
+                    .foregroundColor(.blue)
+                + Text(task.title ?? "")
                     .strikethrough(task.isComplete)
                     .foregroundColor(task.isComplete ? .gray : .primary)
                 if let note = task.note {
@@ -42,5 +45,4 @@ struct TaskRowView: View {
     let task = Task.preview(in: context)
     let viewModel = TaskViewModel()
     TaskRowView(task: task, viewModel: viewModel)
-        .environment(\.managedObjectContext, context) // Pass the context to your view
 }

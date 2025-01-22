@@ -57,4 +57,14 @@ struct PersistenceController {
         })
         container.viewContext.automaticallyMergesChangesFromParent = true
     }
+    
+    func saveContext() {
+        guard container.viewContext.hasChanges else { return }
+        do {
+            try container.viewContext.save()
+        } catch {
+            print("Failed to save context: \(error)")
+        }
+    }
+
 }

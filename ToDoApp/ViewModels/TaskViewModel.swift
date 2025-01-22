@@ -10,13 +10,16 @@ import CoreData
 import Combine
 
 class TaskViewModel: ObservableObject {
-    let container = PersistenceController.shared.container
     @Published var tasks: [Task] = []
     @Published var searchQuery: String = ""
+    
+    let sharedPersistenceController = PersistenceController.shared
+    let container = PersistenceController.shared.container
     private var cancellables = Set<AnyCancellable>()
 
     init() {
         $searchQuery
+            .removeDuplicates()
             .debounce(for: .milliseconds(300), scheduler: DispatchQueue.main)
             .sink { [weak self] _ in
                 self?.fetchTasks()
@@ -40,35 +43,27 @@ class TaskViewModel: ObservableObject {
         }
     }
 
-    func addTask(title: String, note: String? = nil) {
+    func addTask(title: String, note: String? = nil, priority: TaskPriority? = .none) {
         let newTask = Task(context: container.viewContext)
         newTask.title = title
         newTask.note = note
+        newTask.priority = priority?.rawValue
         newTask.isComplete = false
         newTask.timestamp = Date()
         
-        saveContext()
+        sharedPersistenceController.saveContext()
         fetchTasks()
     }
     
     func deleteTask(_ task: Task) {
         container.viewContext.delete(task)
-        saveContext()
+        sharedPersistenceController.saveContext()
         fetchTasks()
     }
 
     func toggleTaskCompletion(_ task: Task) {
         task.isComplete.toggle()
-        saveContext()
+        sharedPersistenceController.saveContext()
         fetchTasks()
     }
-
-    private func saveContext() {
-        do {
-            try container.viewContext.save()
-        } catch {
-            print("Failed to save context: \(error)")
-        }
-    }
-
 }
