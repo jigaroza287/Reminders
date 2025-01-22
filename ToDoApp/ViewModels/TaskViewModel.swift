@@ -11,7 +11,12 @@ import Combine
 
 class TaskViewModel: ObservableObject {
     @Published var tasks: [Task] = []
+    @Published var taskTitle: String = ""
+    @Published var taskNote: String = ""
+    @Published var taskSelectedPriority: TaskPriority = .low
+
     @Published var searchQuery: String = ""
+    var addTaskButtonTapAction = PassthroughSubject<Void, Never>()
     
     let sharedPersistenceController = PersistenceController.shared
     let container = PersistenceController.shared.container
@@ -43,16 +48,17 @@ class TaskViewModel: ObservableObject {
         }
     }
 
-    func addTask(title: String, note: String? = nil, priority: TaskPriority? = .none) {
+    func addTask() {
         let newTask = Task(context: container.viewContext)
-        newTask.title = title
-        newTask.note = note
-        newTask.priority = priority?.rawValue
+        newTask.title = taskTitle
+        newTask.note = taskNote
+        newTask.priority = taskSelectedPriority.rawValue
         newTask.isComplete = false
         newTask.timestamp = Date()
         
         sharedPersistenceController.saveContext()
         fetchTasks()
+        resetNewTaskData()
     }
     
     func deleteTask(_ task: Task) {
@@ -65,5 +71,11 @@ class TaskViewModel: ObservableObject {
         task.isComplete.toggle()
         sharedPersistenceController.saveContext()
         fetchTasks()
+    }
+    
+    private func resetNewTaskData() {
+        taskTitle = ""
+        taskNote = ""
+        taskSelectedPriority = .low
     }
 }
