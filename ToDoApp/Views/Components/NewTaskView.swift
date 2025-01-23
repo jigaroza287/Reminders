@@ -17,24 +17,15 @@ struct NewTaskView: View {
         VStack {
             HStack(alignment: .center) {
                 VStack(alignment: .leading) {
-                    TextField("New Task", text: $viewModel.taskTitle)
+                    TextField("Task Name", text: $viewModel.taskTitle)
                         .focused($isTextFieldFocused)
-                    TextField("Note", text: $viewModel.taskNote)
+                    TextField("Add Note", text: $viewModel.taskNote)
                         .focused($isTextFieldFocused)
                         .font(.footnote)
                         .padding(.top, 4)
-                } // VStack - New task
+                }
                 .padding(.vertical, 8)
-                Button(action: {
-                    guard !viewModel.taskTitle.isEmpty else { return }
-                    if isEditing {
-                        viewModel.saveEditedTask()
-                        dismiss()
-                    } else {
-                        viewModel.addTask()
-                    }
-                    isTextFieldFocused = false
-                }) {
+                Button(action: handleSave) {
                     if isEditing {
                         Text("Done")
                     } else {
@@ -42,19 +33,32 @@ struct NewTaskView: View {
                             .font(.title)
                             .foregroundColor(.blue)
                     }
-                } // Button - Add task
+                }
                 .buttonStyle(.plain)
-            } // HStack - New task
+            }
+            .padding()
+            
             Picker("Priority", selection: $viewModel.taskSelectedPriority) {
                 ForEach(TaskPriority.allCases, id: \.self) { priority in
                     Text(priority.rawValue).tag(priority)
                 }
-            } // Picker - Priority
+            }
             .pickerStyle(SegmentedPickerStyle())
-            .padding(.top, 4)
+            .padding()
             
-        } // VStack - Top container
-        .padding(.horizontal, isEditing ? 24 : 0)
+        }
+        .padding(.horizontal, 16)
+    }
+    
+    private func handleSave() {
+        guard !viewModel.taskTitle.isEmpty else { return }
+        if isEditing {
+            viewModel.saveEditedTask()
+            dismiss()
+        } else {
+            viewModel.addTask()
+        }
+        isTextFieldFocused = false
     }
 }
 

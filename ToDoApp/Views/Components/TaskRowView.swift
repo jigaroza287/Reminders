@@ -28,7 +28,7 @@ struct TaskRowView: View {
                 + Text(task.title ?? "")
                     .strikethrough(task.isComplete)
                     .foregroundColor(task.isComplete ? .gray : .primary)
-                if let note = task.note {
+                if let note = task.note, !note.isEmpty {
                     Text(note)
                         .font(.footnote)
                         .strikethrough(task.isComplete)

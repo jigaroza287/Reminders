@@ -11,21 +11,24 @@ import Combine
 
 class TaskViewModel: ObservableObject {
     @Published var tasks: [Task] = []
-    
     @Published var taskTitle: String = ""
     @Published var taskNote: String = ""
     @Published var taskSelectedPriority: TaskPriority = .low
-    
     @Published var taskToEdit: Task?
-
     @Published var searchQuery: String = ""
-    var addTaskButtonTapAction = PassthroughSubject<Void, Never>()
     
-    let sharedPersistenceController = PersistenceController.shared
-    let container = PersistenceController.shared.container
+    let addTaskButtonTapAction = PassthroughSubject<Void, Never>()
+    private let persistenceController = PersistenceController.shared
+    private let container: NSPersistentContainer
     private var cancellables = Set<AnyCancellable>()
 
     init() {
+        self.container = persistenceController.container
+        setupSearchQueryBinding()
+        fetchTasks()
+    }
+
+    private func setupSearchQueryBinding() {
         $searchQuery
             .removeDuplicates()
             .debounce(for: .milliseconds(300), scheduler: DispatchQueue.main)
@@ -33,17 +36,13 @@ class TaskViewModel: ObservableObject {
                 self?.fetchTasks()
             }
             .store(in: &cancellables)
-        
-        fetchTasks()
     }
-    
+
     func fetchTasks() {
         let request: NSFetchRequest<Task> = Task.fetchRequest()
-        
         if !searchQuery.isEmpty {
             request.predicate = NSPredicate(format: "title CONTAINS[cd] %@", searchQuery.trimmingCharacters(in: .whitespaces))
         }
-        
         do {
             tasks = try container.viewContext.fetch(request)
         } catch {
@@ -53,49 +52,53 @@ class TaskViewModel: ObservableObject {
 
     func addTask() {
         let newTask = Task(context: container.viewContext)
-        newTask.title = taskTitle
-        newTask.note = taskNote
-        newTask.priority = taskSelectedPriority.rawValue
-        newTask.isComplete = false
-        newTask.timestamp = Date()
-        
-        sharedPersistenceController.saveContext()
-        fetchTasks()
-        resetNewTaskData()
+        configureTask(newTask)
+        saveChanges()
+        resetTaskData()
     }
-    
+
     func startEditingTask(_ task: Task) {
         taskToEdit = task
         taskTitle = task.title ?? ""
         taskNote = task.note ?? ""
         taskSelectedPriority = TaskPriority.getTaskPriority(task.priority)
     }
-    
+
     func saveEditedTask() {
         guard let task = taskToEdit else { return }
-        task.title = taskTitle
-        task.note = taskNote
-        task.priority = taskSelectedPriority.rawValue
-        sharedPersistenceController.saveContext()
-        fetchTasks()
-        resetNewTaskData()
+        configureTask(task)
+        saveChanges()
+        resetTaskData()
     }
-    
+
     func deleteTask(_ task: Task) {
         container.viewContext.delete(task)
-        sharedPersistenceController.saveContext()
-        fetchTasks()
+        saveChanges()
     }
 
     func toggleTaskCompletion(_ task: Task) {
         task.isComplete.toggle()
-        sharedPersistenceController.saveContext()
+        saveChanges()
+    }
+
+    private func configureTask(_ task: Task) {
+        task.title = taskTitle
+        task.note = taskNote
+        task.priority = taskSelectedPriority.rawValue
+        if task.timestamp == nil {
+            task.timestamp = Date()
+        }
+    }
+
+    private func saveChanges() {
+        persistenceController.saveContext()
         fetchTasks()
     }
-    
-    func resetNewTaskData() {
+
+    private func resetTaskData() {
         taskTitle = ""
         taskNote = ""
         taskSelectedPriority = .low
+        taskToEdit = nil
     }
 }
