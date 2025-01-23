@@ -11,9 +11,12 @@ import Combine
 
 class TaskViewModel: ObservableObject {
     @Published var tasks: [Task] = []
+    
     @Published var taskTitle: String = ""
     @Published var taskNote: String = ""
     @Published var taskSelectedPriority: TaskPriority = .low
+    
+    @Published var taskToEdit: Task?
 
     @Published var searchQuery: String = ""
     var addTaskButtonTapAction = PassthroughSubject<Void, Never>()
@@ -61,6 +64,23 @@ class TaskViewModel: ObservableObject {
         resetNewTaskData()
     }
     
+    func startEditingTask(_ task: Task) {
+        taskToEdit = task
+        taskTitle = task.title ?? ""
+        taskNote = task.note ?? ""
+        taskSelectedPriority = TaskPriority.getTaskPriority(task.priority)
+    }
+    
+    func saveEditedTask() {
+        guard let task = taskToEdit else { return }
+        task.title = taskTitle
+        task.note = taskNote
+        task.priority = taskSelectedPriority.rawValue
+        sharedPersistenceController.saveContext()
+        fetchTasks()
+        resetNewTaskData()
+    }
+    
     func deleteTask(_ task: Task) {
         container.viewContext.delete(task)
         sharedPersistenceController.saveContext()
@@ -73,7 +93,7 @@ class TaskViewModel: ObservableObject {
         fetchTasks()
     }
     
-    private func resetNewTaskData() {
+    func resetNewTaskData() {
         taskTitle = ""
         taskNote = ""
         taskSelectedPriority = .low

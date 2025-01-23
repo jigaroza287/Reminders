@@ -22,6 +22,17 @@ enum TaskPriority: String, CaseIterable {
     case medium = "medium"
     case high = "high"
     
+    static func getTaskPriority(_ value: String?) -> Self {
+        switch value {
+        case "medium":
+            return .medium
+        case "high":
+            return .high
+        default:
+            return .low
+        }
+    }
+    
     func displayText() -> String {
         switch self {
         case .high:

@@ -45,4 +45,5 @@ struct TaskRowView: View {
     let task = Task.preview(in: context)
     let viewModel = TaskViewModel()
     TaskRowView(task: task, viewModel: viewModel)
+        .background(.red)
 }
