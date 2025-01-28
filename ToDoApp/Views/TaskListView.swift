@@ -15,20 +15,20 @@ struct TaskListView: View {
         NavigationStack {
             VStack {
                 TaskSearchView(viewModel: viewModel)
-                NewTaskView(viewModel: viewModel)
-
                 List {
-                    ForEach(viewModel.tasks, id: \.objectID) { task in
-                        TaskRowView(task: task, viewModel: viewModel)
-                            .onTapGesture {
-                                viewModel.startEditingTask(task)
-                                isEditing = true
+                    Section(footer: NewTaskView(viewModel: viewModel)) {
+                        ForEach(viewModel.tasks, id: \.objectID) { task in
+                            TaskRowView(task: task, viewModel: viewModel)
+                                .onTapGesture {
+                                    viewModel.startEditingTask(task)
+                                    isEditing = true
+                                }
+                        }
+                        .onDelete { indexSet in
+                            indexSet.forEach { index in
+                                let task = viewModel.tasks[index]
+                                viewModel.deleteTask(task)
                             }
-                    }
-                    .onDelete { indexSet in
-                        indexSet.forEach { index in
-                            let task = viewModel.tasks[index]
-                            viewModel.deleteTask(task)
                         }
                     }
                 }
