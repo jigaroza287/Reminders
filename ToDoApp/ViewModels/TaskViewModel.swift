@@ -14,6 +14,7 @@ class TaskViewModel: ObservableObject {
     @Published var taskTitle: String = ""
     @Published var taskNote: String = ""
     @Published var taskSelectedPriority: TaskPriority = .low
+    @Published var taskReminderDate: Date?
     @Published var taskToEdit: Task?
     @Published var searchQuery: String = ""
     
@@ -62,6 +63,7 @@ class TaskViewModel: ObservableObject {
         taskTitle = task.title ?? ""
         taskNote = task.note ?? ""
         taskSelectedPriority = TaskPriority.getTaskPriority(task.priority)
+        taskReminderDate = task.reminderDate
     }
 
     func saveEditedTask() {
@@ -72,6 +74,7 @@ class TaskViewModel: ObservableObject {
     }
 
     func deleteTask(_ task: Task) {
+        NotificationManager.shared.removeNotification(id: task.objectID.uriRepresentation().absoluteString)
         container.viewContext.delete(task)
         saveChanges()
     }
@@ -88,6 +91,16 @@ class TaskViewModel: ObservableObject {
         if task.timestamp == nil {
             task.timestamp = Date()
         }
+        task.reminderDate = taskReminderDate
+        
+        if let _taskReminderDate = taskReminderDate {
+            NotificationManager.shared.scheduleNotification(
+                id: task.objectID.uriRepresentation().absoluteString,
+                title: taskTitle,
+                body: taskNote.isEmpty ? "You have a task to complete!" : taskNote,
+                date: _taskReminderDate
+            )
+        }
     }
 
     private func saveChanges() {
@@ -100,5 +113,6 @@ class TaskViewModel: ObservableObject {
         taskNote = ""
         taskSelectedPriority = .low
         taskToEdit = nil
+        taskReminderDate = nil
     }
 }

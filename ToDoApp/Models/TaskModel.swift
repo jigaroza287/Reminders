@@ -44,3 +44,14 @@ enum TaskPriority: String, CaseIterable {
         }
     }
 }
+
+extension Optional where Wrapped == TaskPriority {
+    func displayText() -> String {
+        switch self {
+        case .some(let priority):
+            return priority.displayText()
+        case .none:
+            return ""
+        }
+    }
+}

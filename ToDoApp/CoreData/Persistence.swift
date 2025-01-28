@@ -20,6 +20,7 @@ struct PersistenceController {
             newItem.note = "Task \(counter + 1) example note"
             newItem.isComplete = false
             newItem.timestamp = Date()
+            newItem.reminderDate = Date()
         }
         do {
             try viewContext.save()

@@ -11,6 +11,16 @@ import SwiftUI
 struct ToDoAppApp: App {
     let persistenceController = PersistenceController.shared
 
+    init() {
+        NotificationManager.shared.requestAuthorization { granted in
+            if granted {
+                print("Notifications authorized.")
+            } else {
+                print("Notifications not authorized.")
+            }
+        }
+    }
+
     var body: some Scene {
         WindowGroup {
             TaskListView()

@@ -11,6 +11,7 @@ struct NewTaskView: View {
     @ObservedObject var viewModel: TaskViewModel
     @FocusState private var isTextFieldFocused: Bool
     @Environment(\.dismiss) private var dismiss
+    @State private var isReminderEnabled: Bool = false
     var isEditing: Bool = false
     
     var body: some View {
@@ -44,10 +45,29 @@ struct NewTaskView: View {
                 }
             }
             .pickerStyle(SegmentedPickerStyle())
-            .padding()
+            .padding(.horizontal, 16)
             
+            Toggle(isOn: $isReminderEnabled) {
+                Text("Set Reminder")
+            }
+            .padding(.horizontal, 16)
+            .padding(.vertical, 8)
+            
+            if isReminderEnabled {
+                DatePicker("", selection: Binding(
+                    get: { viewModel.taskReminderDate ?? Date() },
+                    set: { viewModel.taskReminderDate = $0 }
+                ), displayedComponents: [.date, .hourAndMinute])
+                    .datePickerStyle(.compact)
+                    .padding(.bottom, 16)
+                    .labelsHidden()
+            }
         }
-        .padding(.horizontal, 16)
+        .padding(.horizontal, isEditing ? 16 : 0)
+        .background(.white)
+        .onAppear {
+            isReminderEnabled = viewModel.taskReminderDate != nil
+        }
     }
     
     private func handleSave() {
@@ -59,6 +79,7 @@ struct NewTaskView: View {
             viewModel.addTask()
         }
         isTextFieldFocused = false
+        isReminderEnabled = false
     }
 }
 

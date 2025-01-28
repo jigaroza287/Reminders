@@ -10,6 +10,24 @@ struct TaskRowView: View {
     let task: Task
     @ObservedObject var viewModel: TaskViewModel
     
+    private let dateFormatter: DateFormatter = {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "dd/MM/yy, hh:mm a"
+            return formatter
+        }()
+    
+    var titleForegroundColor: Color {
+        task.isComplete ?
+            .gray :
+            .primary
+    }
+    
+    var reminderDateForegroundColor: Color {
+        task.reminderDate ?? Date() <= Date() ?
+            .red :
+            .gray
+    }
+    
     var body: some View {
         HStack {
             Button(action: {
@@ -22,20 +40,27 @@ struct TaskRowView: View {
             .buttonStyle(PlainButtonStyle())
             .padding(.trailing, 8)
             VStack(alignment: .leading) {
-                Text(TaskPriority(rawValue: task.priority ?? "")?.displayText() ?? "")
+                Text(TaskPriority(rawValue: task.priority ?? "").displayText())
                     .font(.subheadline)
                     .foregroundColor(.blue)
                 + Text(task.title ?? "")
                     .strikethrough(task.isComplete)
-                    .foregroundColor(task.isComplete ? .gray : .primary)
+                    .foregroundColor(titleForegroundColor)
                 if let note = task.note, !note.isEmpty {
                     Text(note)
                         .font(.footnote)
                         .strikethrough(task.isComplete)
                         .foregroundColor(.gray)
                 }
+                if let reminderDate = task.reminderDate {
+                    Text(dateFormatter.string(from: reminderDate))
+                        .font(.footnote)
+                        .strikethrough(task.isComplete)
+                        .foregroundColor(reminderDateForegroundColor)
+                    
+                }
             }
-        } // HStack
+        }
         .padding(.vertical, 8)
     }
 }
