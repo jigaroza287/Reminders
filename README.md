@@ -2,6 +2,11 @@
 
 A SwiftUI-based To-Do List application with Core Data for persistent task management.
 
+![To-DoListApp](https://github.com/user-attachments/assets/a69a0340-1b27-4da5-a6c6-c391f921b9b0)
+![To-DoListApp-Search](https://github.com/user-attachments/assets/e6c6f1ad-397f-4112-afb9-adaee9eb9902)
+![To-DoListApp-Reminder](https://github.com/user-attachments/assets/b4bc723f-04ac-49e4-860e-a9cc8c95aa14)
+
+
 ## Features
 
 - Add, delete, and update tasks with optional notes and priorities.
