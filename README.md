@@ -120,7 +120,6 @@ A SwiftUI-based To-Do List application with Core Data for persistent task manage
 
 ## Future Enhancements
 
-- Implement task reminders with local notifications.
 - Add due dates and sorting options.
 - Provide user authentication and data syncing with iCloud.
 
