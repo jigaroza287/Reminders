@@ -22,8 +22,8 @@ struct TaskRowView: View {
             .primary
     }
     
-    var reminderDateForegroundColor: Color {
-        task.reminderDate ?? Date() <= Date() ?
+    var dueDateForegroundColor: Color {
+        task.dueDate ?? Date() <= Date() ?
             .red :
             .gray
     }
@@ -52,11 +52,11 @@ struct TaskRowView: View {
                         .strikethrough(task.isComplete)
                         .foregroundColor(.gray)
                 }
-                if let reminderDate = task.reminderDate {
-                    Text(dateFormatter.string(from: reminderDate))
+                if let dueDate = task.dueDate {
+                    Text(dateFormatter.string(from: dueDate))
                         .font(.footnote)
                         .strikethrough(task.isComplete)
-                        .foregroundColor(reminderDateForegroundColor)
+                        .foregroundColor(dueDateForegroundColor)
                     
                 }
             }

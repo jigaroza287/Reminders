@@ -14,7 +14,7 @@ class TaskViewModel: ObservableObject {
     @Published var taskTitle: String = ""
     @Published var taskNote: String = ""
     @Published var taskSelectedPriority: TaskPriority = .low
-    @Published var taskReminderDate: Date?
+    @Published var taskDueDate: Date?
     @Published var taskToEdit: Task?
     @Published var searchQuery: String = ""
     
@@ -25,11 +25,11 @@ class TaskViewModel: ObservableObject {
 
     init() {
         self.container = persistenceController.container
-        setupSearchQueryBinding()
+        setupBinding()
         fetchTasks()
     }
 
-    private func setupSearchQueryBinding() {
+    private func setupBinding() {
         $searchQuery
             .removeDuplicates()
             .debounce(for: .milliseconds(300), scheduler: DispatchQueue.main)
@@ -63,7 +63,7 @@ class TaskViewModel: ObservableObject {
         taskTitle = task.title ?? ""
         taskNote = task.note ?? ""
         taskSelectedPriority = TaskPriority.getTaskPriority(task.priority)
-        taskReminderDate = task.reminderDate
+        taskDueDate = task.dueDate
     }
 
     func saveEditedTask() {
@@ -91,14 +91,14 @@ class TaskViewModel: ObservableObject {
         if task.timestamp == nil {
             task.timestamp = Date()
         }
-        task.reminderDate = taskReminderDate
+        task.dueDate = taskDueDate
         
-        if let _taskReminderDate = taskReminderDate {
+        if let _taskDueDate = taskDueDate {
             NotificationManager.shared.scheduleNotification(
                 id: task.objectID.uriRepresentation().absoluteString,
                 title: taskTitle,
                 body: taskNote.isEmpty ? "You have a task to complete!" : taskNote,
-                date: _taskReminderDate
+                date: _taskDueDate
             )
         }
     }
@@ -113,6 +113,6 @@ class TaskViewModel: ObservableObject {
         taskNote = ""
         taskSelectedPriority = .low
         taskToEdit = nil
-        taskReminderDate = nil
+        taskDueDate = nil
     }
 }

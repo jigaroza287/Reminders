@@ -55,8 +55,8 @@ struct NewTaskView: View {
             
             if isReminderEnabled {
                 DatePicker("", selection: Binding(
-                    get: { viewModel.taskReminderDate ?? Date() },
-                    set: { viewModel.taskReminderDate = $0 }
+                    get: { viewModel.taskDueDate ?? Date() },
+                    set: { viewModel.taskDueDate = $0 }
                 ), displayedComponents: [.date, .hourAndMinute])
                     .datePickerStyle(.compact)
                     .padding(.bottom, 16)
@@ -66,7 +66,7 @@ struct NewTaskView: View {
         .padding(.horizontal, isEditing ? 16 : 0)
         .background(.white)
         .onAppear {
-            isReminderEnabled = viewModel.taskReminderDate != nil
+            isReminderEnabled = viewModel.taskDueDate != nil
         }
     }
     
