@@ -1,13 +1,13 @@
 //
-//  ToDoAppUITestsLaunchTests.swift
-//  ToDoAppUITests
+//  RemindersUITestsLaunchTests.swift
+//  RemindersUITests
 //
 //  Created by Jigar Oza on 19/01/25.
 //
 
 import XCTest
 
-final class ToDoAppUITestsLaunchTests: XCTestCase {
+final class RemindersUITestsLaunchTests: XCTestCase {
 
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true

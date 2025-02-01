@@ -1,6 +1,6 @@
 //
 //  Persistence.swift
-//  ToDoApp
+//  Reminders
 //
 //  Created by Jigar Oza on 19/01/25.
 //
@@ -15,9 +15,9 @@ struct PersistenceController {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
         for counter in 0..<10 {
-            let newItem = Task(context: viewContext)
-            newItem.title = "Task \(counter + 1)"
-            newItem.note = "Task \(counter + 1) example note"
+            let newItem = Reminder(context: viewContext)
+            newItem.title = "Reminder \(counter + 1)"
+            newItem.note = "Reminder \(counter + 1) example note"
             newItem.isComplete = false
             newItem.timestamp = Date()
             newItem.dueDate = Date()
@@ -36,7 +36,7 @@ struct PersistenceController {
     let container: NSPersistentContainer
 
     init(inMemory: Bool = false) {
-        container = NSPersistentContainer(name: "ToDoApp")
+        container = NSPersistentContainer(name: "Reminders")
         if inMemory {
             container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
         }

@@ -1,17 +1,17 @@
 //
 //  SearchView.swift
-//  ToDoApp
+//  Reminders
 //
 //  Created by Jigar Oza on 22/01/25.
 //
 
 import SwiftUI
 
-struct TaskSearchView: View {
-    @ObservedObject var viewModel: TaskViewModel
+struct ReminderSearchView: View {
+    @ObservedObject var viewModel: ReminderViewModel
 
     var body: some View {
-        TextField("Search tasks...", text: $viewModel.searchQuery)
+        TextField("Search reminders...", text: $viewModel.searchQuery)
             .textFieldStyle(.roundedBorder)
             .padding([.horizontal, .top])
             .overlay(
@@ -34,5 +34,5 @@ struct TaskSearchView: View {
 }
 
 #Preview {
-    TaskSearchView(viewModel: TaskViewModel())
+    ReminderSearchView(viewModel: ReminderViewModel())
 }

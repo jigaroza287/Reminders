@@ -1,6 +1,6 @@
 //
-//  ToDoAppApp.swift
-//  ToDoApp
+//  RemindersApp.swift
+//  Reminders
 //
 //  Created by Jigar Oza on 19/01/25.
 //
@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct ToDoAppApp: App {
+struct RemindersApp: App {
     let persistenceController = PersistenceController.shared
 
     init() {
@@ -23,7 +23,7 @@ struct ToDoAppApp: App {
 
     var body: some Scene {
         WindowGroup {
-            TaskListView()
+            ReminderListView()
         }
     }
 }

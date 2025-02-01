@@ -1,14 +1,14 @@
 //
-//  ToDoAppTests.swift
-//  ToDoAppTests
+//  RemindersTests.swift
+//  RemindersTests
 //
 //  Created by Jigar Oza on 19/01/25.
 //
 
 import XCTest
-@testable import ToDoApp
+@testable import Reminders
 
-final class ToDoAppTests: XCTestCase {
+final class RemindersTests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.

@@ -1,6 +1,6 @@
 //
 //  NotificationManager.swift
-//  ToDoApp
+//  Reminders
 //
 //  Created by Jigar Oza on 28/01/25.
 //

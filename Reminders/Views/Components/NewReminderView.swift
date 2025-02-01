@@ -1,26 +1,26 @@
 //
-//  NewTaskView.swift
-//  ToDoApp
+//  NewReminderView.swift
+//  Reminders
 //
 //  Created by Jigar Oza on 22/01/25.
 //
 
 import SwiftUI
 
-struct NewTaskView: View {
-    @ObservedObject var viewModel: TaskViewModel
+struct NewReminderView: View {
+    @ObservedObject var viewModel: ReminderViewModel
     @FocusState private var isTextFieldFocused: Bool
     @Environment(\.dismiss) private var dismiss
-    @State private var isReminderEnabled: Bool = false
+    @State private var isDueDateEnabled: Bool = false
     var isEditing: Bool = false
     
     var body: some View {
         VStack {
             HStack(alignment: .center) {
                 VStack(alignment: .leading) {
-                    TextField("Task Name", text: $viewModel.taskTitle)
+                    TextField("Reminder Name", text: $viewModel.reminderTitle)
                         .focused($isTextFieldFocused)
-                    TextField("Add Note", text: $viewModel.taskNote)
+                    TextField("Add Note", text: $viewModel.reminderNote)
                         .focused($isTextFieldFocused)
                         .font(.footnote)
                         .padding(.top, 4)
@@ -39,24 +39,24 @@ struct NewTaskView: View {
             }
             .padding()
             
-            Picker("Priority", selection: $viewModel.taskSelectedPriority) {
-                ForEach(TaskPriority.allCases, id: \.self) { priority in
+            Picker("Priority", selection: $viewModel.reminderSelectedPriority) {
+                ForEach(ReminderPriority.allCases, id: \.self) { priority in
                     Text(priority.rawValue).tag(priority)
                 }
             }
             .pickerStyle(SegmentedPickerStyle())
             .padding(.horizontal, 16)
             
-            Toggle(isOn: $isReminderEnabled) {
-                Text("Set Reminder")
+            Toggle(isOn: $isDueDateEnabled) {
+                Text("Due on")
             }
             .padding(.horizontal, 16)
             .padding(.vertical, 8)
             
-            if isReminderEnabled {
+            if isDueDateEnabled {
                 DatePicker("", selection: Binding(
-                    get: { viewModel.taskDueDate ?? Date() },
-                    set: { viewModel.taskDueDate = $0 }
+                    get: { viewModel.reminderDueDate ?? Date() },
+                    set: { viewModel.reminderDueDate = $0 }
                 ), displayedComponents: [.date, .hourAndMinute])
                     .datePickerStyle(.compact)
                     .padding(.bottom, 16)
@@ -66,23 +66,23 @@ struct NewTaskView: View {
         .padding(.horizontal, isEditing ? 16 : 0)
         .background(.white)
         .onAppear {
-            isReminderEnabled = viewModel.taskDueDate != nil
+            isDueDateEnabled = viewModel.reminderDueDate != nil
         }
     }
     
     private func handleSave() {
-        guard !viewModel.taskTitle.isEmpty else { return }
+        guard !viewModel.reminderTitle.isEmpty else { return }
         if isEditing {
-            viewModel.saveEditedTask()
+            viewModel.saveEditedReminder()
             dismiss()
         } else {
-            viewModel.addTask()
+            viewModel.addReminder()
         }
         isTextFieldFocused = false
-        isReminderEnabled = false
+        isDueDateEnabled = false
     }
 }
 
 #Preview {
-    NewTaskView(viewModel: TaskViewModel())
+    NewReminderView(viewModel: ReminderViewModel())
 }
