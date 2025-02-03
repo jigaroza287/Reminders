@@ -41,7 +41,7 @@ struct NewReminderView: View {
             
             Picker("Priority", selection: $viewModel.reminderSelectedPriority) {
                 ForEach(ReminderPriority.allCases, id: \.self) { priority in
-                    Text(priority.rawValue).tag(priority)
+                    Text(priority.title).tag(priority)
                 }
             }
             .pickerStyle(SegmentedPickerStyle())

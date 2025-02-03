@@ -17,16 +17,27 @@ extension Reminder {
     }
 }
 
-enum ReminderPriority: String, CaseIterable {
-    case low = "low"
-    case medium = "medium"
-    case high = "high"
+enum ReminderPriority: Int16, CaseIterable {
+    case low = 0
+    case medium = 1
+    case high = 2
     
-    static func getReminderPriority(_ value: String?) -> Self {
+    var title: String {
+        switch self {
+        case .low:
+            return "Low"
+        case .medium:
+            return "Medium"
+        case .high:
+            return "High"
+        }
+    }
+    
+    static func getReminderPriority(_ value: Int16) -> Self {
         switch value {
-        case "medium":
+        case 1:
             return .medium
-        case "high":
+        case 2:
             return .high
         default:
             return .low
@@ -54,4 +65,10 @@ extension Optional where Wrapped == ReminderPriority {
             return ""
         }
     }
+}
+
+enum ReminderSortingOption: String, CaseIterable {
+    case dueDate = "Due Date"
+    case priority = "Priority"
+    case creationDate = "Creation Date"
 }

@@ -15,7 +15,6 @@
 		5BF74D932D4E03E000771333 /* NewReminderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF74D842D4E03E000771333 /* NewReminderView.swift */; };
 		5BF74D942D4E03E000771333 /* ReminderRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF74D852D4E03E000771333 /* ReminderRowView.swift */; };
 		5BF74D952D4E03E000771333 /* RemindersApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF74D8B2D4E03E000771333 /* RemindersApp.swift */; };
-		5BF74D962D4E03E000771333 /* ReminderSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF74D862D4E03E000771333 /* ReminderSearchView.swift */; };
 		5BF74D972D4E03E000771333 /* ReminderListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF74D882D4E03E000771333 /* ReminderListView.swift */; };
 		5BF74D982D4E03E000771333 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5BF74D7E2D4E03E000771333 /* Preview Assets.xcassets */; };
 		5BF74D992D4E03E000771333 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5BF74D8A2D4E03E000771333 /* Assets.xcassets */; };
@@ -52,7 +51,6 @@
 		5BF74D822D4E03E000771333 /* ReminderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderViewModel.swift; sourceTree = "<group>"; };
 		5BF74D842D4E03E000771333 /* NewReminderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewReminderView.swift; sourceTree = "<group>"; };
 		5BF74D852D4E03E000771333 /* ReminderRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderRowView.swift; sourceTree = "<group>"; };
-		5BF74D862D4E03E000771333 /* ReminderSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderSearchView.swift; sourceTree = "<group>"; };
 		5BF74D882D4E03E000771333 /* ReminderListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderListView.swift; sourceTree = "<group>"; };
 		5BF74D8A2D4E03E000771333 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5BF74D8B2D4E03E000771333 /* RemindersApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemindersApp.swift; sourceTree = "<group>"; };
@@ -153,7 +151,6 @@
 			children = (
 				5BF74D842D4E03E000771333 /* NewReminderView.swift */,
 				5BF74D852D4E03E000771333 /* ReminderRowView.swift */,
-				5BF74D862D4E03E000771333 /* ReminderSearchView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -344,7 +341,6 @@
 				5BF74D932D4E03E000771333 /* NewReminderView.swift in Sources */,
 				5BF74D942D4E03E000771333 /* ReminderRowView.swift in Sources */,
 				5BF74D952D4E03E000771333 /* RemindersApp.swift in Sources */,
-				5BF74D962D4E03E000771333 /* ReminderSearchView.swift in Sources */,
 				5BF74D972D4E03E000771333 /* ReminderListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

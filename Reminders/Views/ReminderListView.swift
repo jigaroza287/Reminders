@@ -14,7 +14,23 @@ struct ReminderListView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                ReminderSearchView(viewModel: viewModel)
+                HStack {
+                    TextField("Search tasks...", text: $viewModel.searchQuery)
+                        .textFieldStyle(.roundedBorder)
+                        .padding([.horizontal, .top])
+                    Menu {
+                        Picker(selection: $viewModel.selectedSortingOption, label: EmptyView()) {
+                            ForEach(ReminderSortingOption.allCases, id: \.self) { option in
+                                Text(option.rawValue).tag(option)
+                            }
+                        }
+                    } label: {
+                        Image(systemName: "ellipsis.circle")
+                            .padding(.top, 16)
+                            .padding(.trailing, 16)
+                    }
+                }
+                
                 List {
                     Section(footer: NewReminderView(viewModel: viewModel)) {
                         ForEach(viewModel.reminders, id: \.objectID) { reminder in

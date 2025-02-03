@@ -40,7 +40,7 @@ struct ReminderRowView: View {
             .buttonStyle(PlainButtonStyle())
             .padding(.trailing, 8)
             VStack(alignment: .leading) {
-                Text(ReminderPriority(rawValue: reminder.priority ?? "").displayText())
+                Text(ReminderPriority(rawValue: reminder.priority).displayText())
                     .font(.subheadline)
                     .foregroundColor(.blue)
                 + Text(reminder.title ?? "")

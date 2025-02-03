@@ -17,18 +17,19 @@ class ReminderViewModel: ObservableObject {
     @Published var reminderDueDate: Date?
     @Published var reminderToEdit: Reminder?
     @Published var searchQuery: String = ""
+    @Published var selectedSortingOption: ReminderSortingOption = .dueDate
     
     let addReminderButtonTapAction = PassthroughSubject<Void, Never>()
     private let persistenceController = PersistenceController.shared
     private let container: NSPersistentContainer
     private var cancellables = Set<AnyCancellable>()
-
+    
     init() {
         self.container = persistenceController.container
         setupBinding()
         fetchReminders()
     }
-
+    
     private func setupBinding() {
         $searchQuery
             .removeDuplicates()
@@ -37,27 +38,44 @@ class ReminderViewModel: ObservableObject {
                 self?.fetchReminders()
             }
             .store(in: &cancellables)
+        
+        $selectedSortingOption
+            .sink { [weak self] _ in
+                self?.fetchReminders()
+            }
+            .store(in: &cancellables)
+        
     }
-
+    
     func fetchReminders() {
         let request: NSFetchRequest<Reminder> = Reminder.fetchRequest()
         if !searchQuery.isEmpty {
             request.predicate = NSPredicate(format: "title CONTAINS[cd] %@", searchQuery.trimmingCharacters(in: .whitespaces))
         }
+        
+        switch selectedSortingOption {
+        case .dueDate:
+            request.sortDescriptors = [NSSortDescriptor(key: "dueDate", ascending: true)]
+        case .priority:
+            request.sortDescriptors = [NSSortDescriptor(key: "priority", ascending: false)]
+        case .creationDate:
+            request.sortDescriptors = [NSSortDescriptor(key: "timestamp", ascending: false)]
+        }
+        
         do {
             reminders = try container.viewContext.fetch(request)
         } catch {
             print("Failed to fetch reminders: \(error)")
         }
     }
-
+    
     func addReminder() {
         let newReminder = Reminder(context: container.viewContext)
         configureReminder(newReminder)
         saveChanges()
         resetReminderData()
     }
-
+    
     func startEditingReminder(_ reminder: Reminder) {
         reminderToEdit = reminder
         reminderTitle = reminder.title ?? ""
@@ -65,25 +83,25 @@ class ReminderViewModel: ObservableObject {
         reminderSelectedPriority = ReminderPriority.getReminderPriority(reminder.priority)
         reminderDueDate = reminder.dueDate
     }
-
+    
     func saveEditedReminder() {
         guard let reminder = reminderToEdit else { return }
         configureReminder(reminder)
         saveChanges()
         resetReminderData()
     }
-
+    
     func deleteReminder(_ reminder: Reminder) {
         NotificationManager.shared.removeNotification(id: reminder.objectID.uriRepresentation().absoluteString)
         container.viewContext.delete(reminder)
         saveChanges()
     }
-
+    
     func toggleReminderCompletion(_ reminder: Reminder) {
         reminder.isComplete.toggle()
         saveChanges()
     }
-
+    
     private func configureReminder(_ reminder: Reminder) {
         reminder.title = reminderTitle
         reminder.note = reminderNote
@@ -102,12 +120,12 @@ class ReminderViewModel: ObservableObject {
             )
         }
     }
-
+    
     private func saveChanges() {
         persistenceController.saveContext()
         fetchReminders()
     }
-
+    
     private func resetReminderData() {
         reminderTitle = ""
         reminderNote = ""
