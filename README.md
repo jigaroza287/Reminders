@@ -118,17 +118,5 @@ A SwiftUI-based To-Do List application with Core Data for persistent task manage
 
 ---
 
-## Future Enhancements
-
-- Add due dates and sorting options.
-- Provide user authentication and data syncing with iCloud.
-
----
-
-## Screenshots
-Add screenshots of your app here for better visualization.
-
----
-
 ## License
 This project is licensed under the MIT License.
