@@ -23,7 +23,7 @@ struct RemindersApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ReminderListView()
+            LandingView()
         }
     }
 }

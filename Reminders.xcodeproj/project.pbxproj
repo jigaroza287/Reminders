@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5BB95DD62D59C6E200794169 /* BiometricAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB95DD52D59C6E200794169 /* BiometricAuthManager.swift */; };
+		5BEFD5DB2D561B8100A17F86 /* LandingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BEFD5DA2D561B8100A17F86 /* LandingView.swift */; };
 		5BF74D8E2D4E03E000771333 /* ReminderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF74D822D4E03E000771333 /* ReminderViewModel.swift */; };
 		5BF74D8F2D4E03E000771333 /* Reminders.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5BF74D7A2D4E03E000771333 /* Reminders.xcdatamodeld */; };
 		5BF74D902D4E03E000771333 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF74D792D4E03E000771333 /* Persistence.swift */; };
@@ -44,6 +46,9 @@
 		5B7D7D9B2D3D359700FC6BC6 /* Reminders.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reminders.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B7D7DB02D3D359900FC6BC6 /* RemindersTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RemindersTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B7D7DBA2D3D359900FC6BC6 /* RemindersUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RemindersUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5BB95DD52D59C6E200794169 /* BiometricAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometricAuthManager.swift; sourceTree = "<group>"; };
+		5BE145712D59CD5E00F5EEC1 /* Reminders.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Reminders.entitlements; sourceTree = "<group>"; };
+		5BEFD5DA2D561B8100A17F86 /* LandingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingView.swift; sourceTree = "<group>"; };
 		5BF74D792D4E03E000771333 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		5BF74D7C2D4E03E000771333 /* TaskModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskModel.swift; sourceTree = "<group>"; };
 		5BF74D7E2D4E03E000771333 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -134,6 +139,7 @@
 			isa = PBXGroup;
 			children = (
 				5BF74D802D4E03E000771333 /* NotificationManager.swift */,
+				5BB95DD52D59C6E200794169 /* BiometricAuthManager.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -160,6 +166,7 @@
 			children = (
 				5BF74D872D4E03E000771333 /* Components */,
 				5BF74D882D4E03E000771333 /* ReminderListView.swift */,
+				5BEFD5DA2D561B8100A17F86 /* LandingView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -167,6 +174,7 @@
 		5BF74D8C2D4E03E000771333 /* Reminders */ = {
 			isa = PBXGroup;
 			children = (
+				5BE145712D59CD5E00F5EEC1 /* Reminders.entitlements */,
 				5BF74D7B2D4E03E000771333 /* CoreData */,
 				5BF74D7D2D4E03E000771333 /* Models */,
 				5BF74D7F2D4E03E000771333 /* Preview Content */,
@@ -337,8 +345,10 @@
 				5BF74D8F2D4E03E000771333 /* Reminders.xcdatamodeld in Sources */,
 				5BF74D902D4E03E000771333 /* Persistence.swift in Sources */,
 				5BF74D912D4E03E000771333 /* NotificationManager.swift in Sources */,
+				5BB95DD62D59C6E200794169 /* BiometricAuthManager.swift in Sources */,
 				5BF74D922D4E03E000771333 /* TaskModel.swift in Sources */,
 				5BF74D932D4E03E000771333 /* NewReminderView.swift in Sources */,
+				5BEFD5DB2D561B8100A17F86 /* LandingView.swift in Sources */,
 				5BF74D942D4E03E000771333 /* ReminderRowView.swift in Sources */,
 				5BF74D952D4E03E000771333 /* RemindersApp.swift in Sources */,
 				5BF74D972D4E03E000771333 /* ReminderListView.swift in Sources */,
@@ -502,14 +512,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Reminders/Reminders.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Reminders/Preview Content\"";
 				DEVELOPMENT_TEAM = M99V4Y6J3G;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "";
 				INFOPLIST_KEY_CFBundleDisplayName = Reminders;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "This app uses Face ID for authentication.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -533,14 +546,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Reminders/Reminders.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Reminders/Preview Content\"";
 				DEVELOPMENT_TEAM = M99V4Y6J3G;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "";
 				INFOPLIST_KEY_CFBundleDisplayName = Reminders;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "This app uses Face ID for authentication.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
