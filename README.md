@@ -15,6 +15,7 @@ A SwiftUI-based To-Do List application with Core Data for persistent task manage
 - Persistent data storage using Core Data.
 - Preview and mock data for development and testing.
 - Animated task completion toggle.
+- Unit tests for viewModels
 
 ## Tech Stack
 
