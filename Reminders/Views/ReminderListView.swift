@@ -18,6 +18,7 @@ struct ReminderListView: View {
                     TextField("Search tasks...", text: $viewModel.searchQuery)
                         .textFieldStyle(.roundedBorder)
                         .padding([.horizontal, .top])
+                        .accessibilityIdentifier("RemindersSearchTextField")
                     Menu {
                         Picker(selection: $viewModel.selectedSortingOption, label: EmptyView()) {
                             ForEach(ReminderSortingOption.allCases, id: \.self) { option in
@@ -29,6 +30,7 @@ struct ReminderListView: View {
                             .padding(.top, 16)
                             .padding(.trailing, 16)
                     }
+                    .accessibilityIdentifier("RemindersSortingMenu")
                 }
                 
                 List {
@@ -39,6 +41,7 @@ struct ReminderListView: View {
                                     viewModel.startEditingReminder(reminder)
                                     isEditing = true
                                 }
+                                .accessibilityIdentifier("ReminderRowView_\(reminder.objectID.uriRepresentation().absoluteString)")
                         }
                         .onDelete { indexSet in
                             indexSet.forEach { index in

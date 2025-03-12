@@ -32,6 +32,7 @@ struct LandingView: View {
                             .imageScale(.large)
                             .font(.system(size: 60))
                     }
+                    .accessibilityIdentifier("AuthenticateFaceIdButton")
                 }
             }
         }

@@ -37,6 +37,7 @@ struct ReminderRowView: View {
                     .foregroundColor(reminder.isComplete ? .green : .gray)
                     .scaleEffect(reminder.isComplete ? 1.2 : 1.0)
             }
+            .accessibilityIdentifier("ReminderCompleteButton")
             .buttonStyle(PlainButtonStyle())
             .padding(.trailing, 8)
             VStack(alignment: .leading) {

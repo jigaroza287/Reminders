@@ -19,8 +19,10 @@ struct NewReminderView: View {
             HStack(alignment: .center) {
                 VStack(alignment: .leading) {
                     TextField("Reminder Name", text: $viewModel.reminderTitle)
+                        .accessibilityIdentifier("ReminderTitleTextField")
                         .focused($isTextFieldFocused)
                     TextField("Add Note", text: $viewModel.reminderNote)
+                        .accessibilityIdentifier("ReminderNoteTextField")
                         .focused($isTextFieldFocused)
                         .font(.footnote)
                         .padding(.top, 4)
@@ -35,6 +37,7 @@ struct NewReminderView: View {
                             .foregroundColor(.blue)
                     }
                 }
+                .accessibilityIdentifier("ReminderAddOrDoneButton")
                 .buttonStyle(.plain)
             }
             .padding()
@@ -44,12 +47,14 @@ struct NewReminderView: View {
                     Text(priority.title).tag(priority)
                 }
             }
+            .accessibilityIdentifier("ReminderPriorityPicker")
             .pickerStyle(SegmentedPickerStyle())
             .padding(.horizontal, 16)
             
             Toggle(isOn: $isDueDateEnabled) {
                 Text("Due on")
             }
+            .accessibilityIdentifier("ReminderDueDateEnableToggle")
             .padding(.horizontal, 16)
             .padding(.vertical, 8)
             
@@ -58,9 +63,10 @@ struct NewReminderView: View {
                     get: { viewModel.reminderDueDate ?? Date() },
                     set: { viewModel.reminderDueDate = $0 }
                 ), displayedComponents: [.date, .hourAndMinute])
-                    .datePickerStyle(.compact)
-                    .padding(.bottom, 16)
-                    .labelsHidden()
+                .accessibilityIdentifier("ReminderDueDateDatePicker")
+                .datePickerStyle(.compact)
+                .padding(.bottom, 16)
+                .labelsHidden()
             }
         }
         .padding(.horizontal, isEditing ? 16 : 0)
