@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		5BB95DD62D59C6E200794169 /* BiometricAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB95DD52D59C6E200794169 /* BiometricAuthManager.swift */; };
+		5BC4A6B62D63759D00E86F65 /* BaseUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC4A6B52D63759D00E86F65 /* BaseUITests.swift */; };
+		5BEC615B2D87F55E00E200EE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BEC615A2D87F55E00E200EE /* LaunchScreen.storyboard */; };
 		5BEFD5DB2D561B8100A17F86 /* LandingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BEFD5DA2D561B8100A17F86 /* LandingView.swift */; };
 		5BF74D8E2D4E03E000771333 /* ReminderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF74D822D4E03E000771333 /* ReminderViewModel.swift */; };
 		5BF74D8F2D4E03E000771333 /* Reminders.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5BF74D7A2D4E03E000771333 /* Reminders.xcdatamodeld */; };
@@ -21,7 +23,6 @@
 		5BF74D982D4E03E000771333 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5BF74D7E2D4E03E000771333 /* Preview Assets.xcassets */; };
 		5BF74D992D4E03E000771333 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5BF74D8A2D4E03E000771333 /* Assets.xcassets */; };
 		5BF74D9C2D4E03E800771333 /* RemindersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF74D9A2D4E03E800771333 /* RemindersTests.swift */; };
-		5BF74DA02D4E03EF00771333 /* RemindersUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF74D9D2D4E03EF00771333 /* RemindersUITests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,7 +47,10 @@
 		5B7D7DB02D3D359900FC6BC6 /* RemindersTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RemindersTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B7D7DBA2D3D359900FC6BC6 /* RemindersUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RemindersUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BB95DD52D59C6E200794169 /* BiometricAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometricAuthManager.swift; sourceTree = "<group>"; };
+		5BC4A6B52D63759D00E86F65 /* BaseUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseUITests.swift; sourceTree = "<group>"; };
 		5BE145712D59CD5E00F5EEC1 /* Reminders.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Reminders.entitlements; sourceTree = "<group>"; };
+		5BEC615A2D87F55E00E200EE /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		5BEC615C2D87F9F800E200EE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		5BEFD5DA2D561B8100A17F86 /* LandingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingView.swift; sourceTree = "<group>"; };
 		5BF74D792D4E03E000771333 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		5BF74D7C2D4E03E000771333 /* TaskModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskModel.swift; sourceTree = "<group>"; };
@@ -60,7 +64,6 @@
 		5BF74D8B2D4E03E000771333 /* RemindersApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemindersApp.swift; sourceTree = "<group>"; };
 		5BF74D8D2D4E03E000771333 /* Reminders.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Reminders.xcdatamodel; sourceTree = "<group>"; };
 		5BF74D9A2D4E03E800771333 /* RemindersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemindersTests.swift; sourceTree = "<group>"; };
-		5BF74D9D2D4E03EF00771333 /* RemindersUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemindersUITests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,6 +175,7 @@
 		5BF74D8C2D4E03E000771333 /* Reminders */ = {
 			isa = PBXGroup;
 			children = (
+				5BEC615C2D87F9F800E200EE /* Info.plist */,
 				5BE145712D59CD5E00F5EEC1 /* Reminders.entitlements */,
 				5BF74D7B2D4E03E000771333 /* CoreData */,
 				5BF74D7D2D4E03E000771333 /* Models */,
@@ -181,6 +185,7 @@
 				5BF74D892D4E03E000771333 /* Views */,
 				5BF74D8A2D4E03E000771333 /* Assets.xcassets */,
 				5BF74D8B2D4E03E000771333 /* RemindersApp.swift */,
+				5BEC615A2D87F55E00E200EE /* LaunchScreen.storyboard */,
 			);
 			path = Reminders;
 			sourceTree = "<group>";
@@ -196,7 +201,7 @@
 		5BF74D9F2D4E03EF00771333 /* RemindersUITests */ = {
 			isa = PBXGroup;
 			children = (
-				5BF74D9D2D4E03EF00771333 /* RemindersUITests.swift */,
+				5BC4A6B52D63759D00E86F65 /* BaseUITests.swift */,
 			);
 			path = RemindersUITests;
 			sourceTree = "<group>";
@@ -282,6 +287,7 @@
 					};
 					5B7D7DB92D3D359900FC6BC6 = {
 						CreatedOnToolsVersion = 16.1;
+						LastSwiftMigration = 1620;
 						TestTargetID = 5B7D7D9A2D3D359700FC6BC6;
 					};
 				};
@@ -312,6 +318,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5BEC615B2D87F55E00E200EE /* LaunchScreen.storyboard in Resources */,
 				5BF74D982D4E03E000771333 /* Preview Assets.xcassets in Resources */,
 				5BF74D992D4E03E000771333 /* Assets.xcassets in Resources */,
 			);
@@ -364,7 +371,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5BF74DA02D4E03EF00771333 /* RemindersUITests.swift in Sources */,
+				5BC4A6B62D63759D00E86F65 /* BaseUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -515,15 +522,14 @@
 				DEVELOPMENT_TEAM = M99V4Y6J3G;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "";
+				INFOPLIST_FILE = Reminders/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Reminders;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "This app uses Face ID for authentication.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -549,15 +555,14 @@
 				DEVELOPMENT_TEAM = M99V4Y6J3G;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "";
+				INFOPLIST_FILE = Reminders/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Reminders;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "This app uses Face ID for authentication.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -612,6 +617,7 @@
 		5B7D7DCB2D3D359900FC6BC6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = M99V4Y6J3G;
@@ -620,6 +626,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ToDoAppUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = ToDoApp;
@@ -629,6 +636,7 @@
 		5B7D7DCC2D3D359900FC6BC6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = M99V4Y6J3G;
