@@ -1,20 +1,17 @@
-# ToDoApp
+# Reminders
 
-A SwiftUI-based To-Do List application with Core Data for persistent task management.
+A SwiftUI-based Reminders application with Core Data for persistent reminders management.
 
-![To-DoListApp](https://github.com/user-attachments/assets/a69a0340-1b27-4da5-a6c6-c391f921b9b0)
-![To-DoListApp-Search](https://github.com/user-attachments/assets/e6c6f1ad-397f-4112-afb9-adaee9eb9902)
-![To-DoListApp-Reminder](https://github.com/user-attachments/assets/b4bc723f-04ac-49e4-860e-a9cc8c95aa14)
-
+![RemindersApp](https://github.com/user-attachments/assets/d5f96b5a-9d75-4604-9b2a-b28ec03f3bb7)
 
 ## Features
 
-- Add, delete, and update tasks with optional notes and priorities.
-- Search tasks with real-time updates using Combine and debouncing.
-- Task priority management with visual indicators for high, medium, and low priorities.
+- Add, delete, and update reminders with optional notes and priorities.
+- Search reminders with real-time updates using Combine and debouncing.
+- Reminder priority management with visual indicators for high, medium, and low priorities.
 - Persistent data storage using Core Data.
 - Preview and mock data for development and testing.
-- Animated task completion toggle.
+- Animated reminder completion toggle.
 - Unit tests for viewModels
 
 ## Tech Stack
@@ -23,6 +20,8 @@ A SwiftUI-based To-Do List application with Core Data for persistent task manage
 - **Frameworks**: SwiftUI, Combine, Core Data
 - **Architecture**: MVVM (Model-View-ViewModel)
 - **Storage**: Core Data with NSPersistentContainer
+- **Authentication**: Biometric authentication using LocalAuthentication framework
+- **Notification**: Local notification for reminders using UserNotifications framework
 
 ---
 
@@ -34,30 +33,37 @@ A SwiftUI-based To-Do List application with Core Data for persistent task manage
    - Manages Core Data setup, including in-memory stores for previewing.
    - Automatically merges changes to the main context.
 
-2. **`TaskModel.swift`**
-   - Core Data entity extension for the `Task` model.
-   - Defines `TaskPriority` enumeration for task priorities.
+2. **`ReminderModel.swift`**
+   - Core Data entity extension for the `Reminder` model.
+   - Defines `ReminderPriority` enumeration for reminder priorities.
 
-3. **`TaskViewModel.swift`**
-   - ObservableObject that manages fetching, searching, and modifying tasks.
+3. **`ReminderViewModel.swift`**
+   - ObservableObject that manages fetching, searching, and modifying reminders.
    - Integrates Combine for debounced search functionality.
-   - Provides methods for CRUD operations on tasks.
+   - Provides methods for CRUD operations on reminders.
 
-4. **`TaskListView.swift`**
-   - Main SwiftUI view for listing, searching, and adding tasks.
-   - Includes a picker for selecting task priority.
+4. **`ReminderListView.swift`**
+   - Main SwiftUI view for listing, searching, and adding reminders.
+   - Includes a picker for selecting reminder priority.
 
-5. **`TaskRowView.swift`**
-   - Subview for individual task rows.
-   - Displays task details with priority indicators and completion toggles.
+5. **`ReminderRowView.swift`**
+   - Subview for individual reminder rows.
+   - Displays reminder details with priority indicators and completion toggles.
 
-6. **`NewTaskView.swift`**
-   - Subview for task list.
-   - Allows adding new task by adding Task name, Notes and Priority.
+6. **`NewReminderView.swift`**
+   - Subview for reminder list.
+   - Allows adding new reminder by adding Reminder name, Notes and Priority.
 
-7. **`TaskSearchView.swift`**
-   - Subview for task list.
-   - Displays Search bar to filter tasks by task name.
+7. **`ReminderSearchView.swift`**
+   - Subview for reminder list.
+   - Displays Search bar to filter reminders by reminder name.
+
+8. **`BiometricAuthManager.swift`**
+   - Handles biometric authentication for security.
+   - Asks user to authenticate with default biometric authentication set in device, i.e. Passcode or FaceId.
+
+9. **`NotificationManager.swift`**
+   - Responsible to set and remove local notifications based on Due date selected for a reminder.
 
 ---
 
@@ -66,11 +72,11 @@ A SwiftUI-based To-Do List application with Core Data for persistent task manage
 1. Clone the repository:
    
    ```
-   git clone https://github.com/jigaroza287/ToDoApp.git
-   cd ToDoApp
+   git clone https://github.com/jigaroza287/Reminders.git
+   cd Reminders
    ```
 
-2. Open `ToDoApp.xcodeproj` in Xcode.
+2. Open `Reminders.xcodeproj` in Xcode.
 
 3. Run the app on a simulator or device.
 
@@ -79,25 +85,26 @@ A SwiftUI-based To-Do List application with Core Data for persistent task manage
 ## Usage
 
 1. **PersistenceController.swift:**
-    - Enter a task title and optional note.
+    - Enter a reminder title and optional note.
     - Select a priority (Low, Medium, High).
-    - Tap the "+" button to save the task.
-2. **Search Tasks:**
-    - Use the search bar to filter tasks by title.
+    - Tap the "+" button to save the reminder.
+2. **Search Reminders:**
+    - Use the search bar to filter reminders by title.
     - Clear the search by tapping the "X" icon.
-3. **Mark Task as Complete/Incomplete:**
-    - Tap the checkmark icon to toggle task completion.
-4. **Delete Tasks:**
-    - Swipe left on a task row to delete it.
+3. **Mark Reminder as Complete/Incomplete:**
+    - Tap the checkmark icon to toggle reminder completion.
+4. **Delete Reminders:**
+    - Swipe left on a reminder row to delete it.
 
 ---
 
 ## Optimization Highlights
 
+- **Authentication:** Uses LocalAuthentication framework to add an extra security layer for biometric authentication.
 - **Debounced Search:** Uses Combine to debounce search queries with .removeDuplicates().
 - **Efficient Data Loading:** Core Data fetch requests are optimized using predicates.
 - **Preview Data:** In-memory Core Data store supports testing and SwiftUI previews.
-- **Priority Labels:** Task priorities visually differentiated for better task management.
+- **Priority Labels:** Reminder priorities visually differentiated for better reminder management.
 
 ---
 
@@ -105,7 +112,7 @@ A SwiftUI-based To-Do List application with Core Data for persistent task manage
 
 - **Core Data:**
 
-  - Core Data operations (e.g., fetch, add, delete) are encapsulated in `TaskViewModel`.
+  - Core Data operations (e.g., fetch, add, delete) are encapsulated in `ReminderViewModel`.
   - Persistent container is shared across the app for consistency.
 
 - **Combine:**
