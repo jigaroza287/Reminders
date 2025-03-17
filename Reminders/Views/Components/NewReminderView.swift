@@ -71,7 +71,7 @@ struct NewReminderView: View {
         }
         .padding(.horizontal, isEditing ? 16 : 0)
         .background(.white)
-        .onAppear {
+        .task {
             isDueDateEnabled = viewModel.reminderDueDate != nil
         }
     }

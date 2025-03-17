@@ -15,7 +15,7 @@ struct ReminderListView: View {
         NavigationStack {
             VStack {
                 HStack {
-                    TextField("Search tasks...", text: $viewModel.searchQuery)
+                    TextField("Search reminders...", text: $viewModel.searchQuery)
                         .textFieldStyle(.roundedBorder)
                         .padding([.horizontal, .top])
                         .accessibilityIdentifier("RemindersSearchTextField")

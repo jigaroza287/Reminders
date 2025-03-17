@@ -34,6 +34,11 @@ struct LandingView: View {
                     }
                     .accessibilityIdentifier("AuthenticateFaceIdButton")
                 }
+                .task {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                        authenticateUser()
+                    }
+                }
             }
         }
     }
